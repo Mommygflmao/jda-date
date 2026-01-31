@@ -47,18 +47,34 @@ body {
     text-align: center;
 }
 
-.warning-box h1 {
-    margin-bottom: 20px;
-}
-
-.warning-box p {
-    margin-bottom: 30px;
-    line-height: 1.5;
-}
-
 .warning-btn {
     padding: 15px 30px;
     font-size: 18px;
+    cursor: pointer;
+}
+
+/* EXIT CONFIRM */
+.exit-confirm {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.exit-box {
+    background: black;
+    border: 2px solid white;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.exit-box button {
+    margin: 15px;
+    padding: 10px 20px;
     cursor: pointer;
 }
 
@@ -70,7 +86,6 @@ body {
     pointer-events: none;
 }
 
-/* LEFT YELLOW */
 .left-panel {
     width: 45%;
     height: 90%;
@@ -79,25 +94,22 @@ body {
     transform: translateX(-120%);
 }
 
-/* RIGHT SIDE */
 .right-panel {
     width: 45%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     gap: 40px;
     transform: translateX(120%);
 }
 
-/* LOGO */
 .logo {
     width: 80%;
     height: 200px;
     background: #66ff00;
 }
 
-/* MENU */
 .menu {
     width: 100%;
     display: flex;
@@ -111,8 +123,8 @@ body {
     color: white;
     font-size: 28px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -122,37 +134,43 @@ body {
     box-shadow: 0 10px 0 rgba(0,0,0,0.25);
 }
 
-/* SLIDE-IN ANIMATIONS */
+/* SLIDE IN */
 .show .left-panel {
     animation: slideLeft 0.8s ease-out forwards;
 }
-
 .show .right-panel {
     animation: slideRight 0.8s ease-out forwards;
 }
 
-@keyframes slideLeft {
-    to { transform: translateX(0); }
-}
-
-@keyframes slideRight {
-    to { transform: translateX(0); }
-}
+@keyframes slideLeft { to { transform: translateX(0); } }
+@keyframes slideRight { to { transform: translateX(0); } }
 </style>
 </head>
 
 <body>
 
-<!-- WARNING -->
+<!-- AUDIO -->
+<audio id="hoverSound" src="hover.mp3" preload="auto"></audio>
+
+<!-- CONTENT WARNING -->
 <div class="warning" id="warning">
     <div class="warning-box">
-        <h1>⚠️ WARNING</h1>
+        <h2>⚠️ WARNING</h2>
         <p>
-            This game contains disturbing content and
-            psychological horror themes.<br><br>
+            This game contains disturbing content and psychological horror themes.
+            <br><br>
             It is not suitable for children or those easily disturbed.
         </p>
         <button class="warning-btn" onclick="acceptWarning()">I Understand</button>
+    </div>
+</div>
+
+<!-- EXIT CONFIRM -->
+<div class="exit-confirm" id="exitConfirm">
+    <div class="exit-box">
+        <p>Are you sure you want to quit?</p>
+        <button onclick="confirmExit()">Yes</button>
+        <button onclick="closeExit()">No</button>
     </div>
 </div>
 
@@ -164,9 +182,9 @@ body {
         <div class="logo"></div>
 
         <div class="menu">
-            <div class="menu-btn">New Game</div>
-            <div class="menu-btn">Settings</div>
-            <div class="menu-btn" onclick="window.close()">Exit</div>
+            <div class="menu-btn" onmouseenter="playHover()">New Game</div>
+            <div class="menu-btn" onmouseenter="playHover()">Settings</div>
+            <div class="menu-btn" onmouseenter="playHover()" onclick="openExit()">Exit</div>
         </div>
     </div>
 </div>
@@ -177,8 +195,28 @@ function acceptWarning() {
     document.getElementById("menu").classList.add("show");
     document.getElementById("menu").style.pointerEvents = "auto";
 }
+
+function playHover() {
+    const s = document.getElementById("hoverSound");
+    s.currentTime = 0;
+    s.play();
+}
+
+function openExit() {
+    document.getElementById("exitConfirm").style.display = "flex";
+}
+
+function closeExit() {
+    document.getElementById("exitConfirm").style.display = "none";
+}
+
+function confirmExit() {
+    window.close();
+}
 </script>
 
 </body>
 </html>
+
+
 
