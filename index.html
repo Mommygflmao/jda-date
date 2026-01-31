@@ -11,10 +11,26 @@
         box-sizing: border-box;
     }
 
+    /* SCROLLING BACKGROUND */
     body {
         width: 100vw;
         height: 100vh;
-        background: #00aaff;
+
+        /* 🔁 228x228 background image */
+        background-image: url("assets/menus/bgshit.png"); /* <-- your 228x228 image */
+        background-repeat: repeat;
+        background-size: 228px 228px;
+
+        animation: scrollBG 10s linear infinite;
+    }
+
+    @keyframes scrollBG {
+        from {
+            background-position: 0 0;
+        }
+        to {
+            background-position: 228px 228px;
+        }
     }
 
     .screen {
@@ -71,12 +87,12 @@
 
     .menu-btn:hover {
         transform: translateY(-8px) scale(1.05);
-        box-shadow: 0 10px 0 rgba(0, 0, 0, 0.25);
+        box-shadow: 0 10px 0 rgba(0,0,0,0.25);
     }
 
     .menu-btn:active {
         transform: translateY(-4px) scale(1.02);
-        box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 0 rgba(0,0,0,0.2);
     }
 </style>
 
@@ -92,8 +108,6 @@
         <div class="menu">
             <div class="menu-btn">New Game</div>
             <div class="menu-btn">Settings</div>
-
-            <!-- EXIT BUTTON -->
             <div class="menu-btn" onclick="window.close()">Exit</div>
         </div>
     </div>
@@ -101,3 +115,9 @@
 
 </body>
 </html>
+
+</div>
+
+</body>
+</html>
+
