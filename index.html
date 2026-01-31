@@ -139,7 +139,7 @@ body {
     animation: slideLeft 0.8s ease-out forwards;
 }
 .show .right-panel {
-    animation: slideRight 0.8s ease-out forwards;
+    animation: slideRight 0.8s ease-out 0.2s forwards; /* staggered delay */
 }
 
 @keyframes slideLeft { to { transform: translateX(0); } }
@@ -182,7 +182,7 @@ body {
         <div class="logo"></div>
 
         <div class="menu">
-            <div class="menu-btn" onmouseenter="playHover()">New Game</div>
+            <div class="menu-btn" onmouseenter="playHover()" onclick="startNewGame()">New Game</div>
             <div class="menu-btn" onmouseenter="playHover()">Settings</div>
             <div class="menu-btn" onmouseenter="playHover()" onclick="openExit()">Exit</div>
         </div>
@@ -211,12 +211,17 @@ function closeExit() {
 }
 
 function confirmExit() {
-    window.close();
+    alert("Thanks for playing!");
+    // Or redirect to a goodbye page
+    // window.location.href = "goodbye.html";
+}
+
+// NEW GAME BUTTON
+function startNewGame() {
+    const gameURL = "https://example.com"; // <-- Replace with your game's URL
+    window.location.href = gameURL; // replaces current tab
 }
 </script>
 
 </body>
 </html>
-
-
-
